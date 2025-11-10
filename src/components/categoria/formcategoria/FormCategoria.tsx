@@ -8,15 +8,20 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import type Tema from "../../../models/Tema";
-import { atualizar, buscar, cadastrar, authHeader } from "../../../services/Service";
+import type Categoria from "../../../models/Categoria";
+import {
+  atualizar,
+  buscar,
+  cadastrar,
+  authHeader,
+} from "../../../services/Service";
 
-function FormTema() {
+function FormCategoria() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [tema, setTema] = useState<Tema>({ id: 0, tipo: "" });
+  const [categoria, setCategoria] = useState<Categoria>({ id: 0, tipo: "" });
 
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
@@ -30,7 +35,7 @@ function FormTema() {
 
   async function buscarCategoriaPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setTema, authHeader(token));
+      await buscar(`/categorias/${id}`, setCategoria, authHeader(token));
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     }
@@ -41,7 +46,7 @@ function FormTema() {
   }, [id]);
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-    setTema({ ...tema, [e.target.name]: e.target.value });
+    setCategoria({ ...categoria, [e.target.name]: e.target.value });
   }
 
   async function salvar(e: FormEvent<HTMLFormElement>) {
@@ -49,11 +54,21 @@ function FormTema() {
     setIsLoading(true);
     try {
       if (id) {
-        await atualizar("/categorias", tema, setTema, authHeader(token));
+        await atualizar(
+          "/categorias",
+          categoria,
+          setCategoria,
+          authHeader(token)
+        );
       } else {
-        await cadastrar("/categorias", tema, setTema, authHeader(token));
+        await cadastrar(
+          "/categorias",
+          categoria,
+          setCategoria,
+          authHeader(token)
+        );
       }
-      navigate("/temas");
+      navigate("/categorias");
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     } finally {
@@ -63,22 +78,36 @@ function FormTema() {
 
   return (
     <div className="container mx-auto max-w-xl my-6">
-      <form onSubmit={salvar} className="bg-white shadow rounded p-4 flex flex-col gap-3">
-        <h2 className="text-xl font-bold">{id ? "Editar categoria" : "Nova categoria"}</h2>
+      <form
+        onSubmit={salvar}
+        className="bg-white shadow rounded p-4 flex flex-col gap-3"
+      >
+        <h2 className="text-xl font-bold">
+          {id ? "Editar categoria" : "Novo categoria"}
+        </h2>
         <input
           name="tipo"
-          value={tema.tipo}
+          value={categoria.tipo}
           onChange={atualizarEstado}
           placeholder="Nome da categoria"
           className="border rounded p-2"
           required
         />
-        <button disabled={isLoading} className="bg-green-600 text-white rounded p-2">
-          {isLoading ? <ClipLoader size={18} /> : id ? "Atualizar" : "Cadastrar"}
+        <button
+          disabled={isLoading}
+          className="bg-green-600 text-white rounded p-2"
+        >
+          {isLoading ? (
+            <ClipLoader size={18} />
+          ) : id ? (
+            "Atualizar"
+          ) : (
+            "Cadastrar"
+          )}
         </button>
       </form>
     </div>
   );
 }
 
-export default FormTema;
+export default FormCategoria;

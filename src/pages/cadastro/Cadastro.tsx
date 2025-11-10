@@ -17,6 +17,7 @@ function Cadastro() {
     usuario: "",
     senha: "",
     foto: "",
+    endereco: "",
   });
 
   useEffect(() => {

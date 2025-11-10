@@ -1,23 +1,25 @@
-import ListaPostagens from "../../components/postagem/listapostagens/ListaPostagens";
-import ModalPostagem from "../../components/postagem/modalpostagem/ModalPostagem";
+import ListaProdutos from "../../components/produto/listaprodutos/ListaProdutos";
+import ModalProduto from "../../components/produto/modalproduto/ModalProduto";
 
 function Home() {
   return (
     <>
-      <div className="bg-indigo-900 flex justify-center">
-        <div className="container grid grid-cols-2 text-white">
+      <div className="bg-[#FEF0E1] flex justify-center">
+        <div className="container grid grid-cols-2">
           <div className="flex flex-col gap-4 items-center justify-center py-4">
-            <h2 className="text-5xl font-bold">Seja Bem Vinde!</h2>
-            <p className="text-xl">Expresse aqui seus pensamentos e opniões</p>
-
+            <h2 className="text-5xl font-bold text-black">Olá,</h2>
+            <h2 className="text-[#D9291A] text-5xl font-bold">
+              estamos abertos
+            </h2>
+            <p className="text-xl">O melhor serviço de entrega do país</p>
             <div className="flex justify-around gap-4">
-              <ModalPostagem />
+              <ModalProduto />
             </div>
           </div>
 
           <div className="flex justify-center ">
             <img
-              src="https://i.imgur.com/fyfri1v.png"
+              src="https://imgur.com/a/1eWmF99.png"
               alt="Imagem Página Home"
               className="w-2/3"
             />
@@ -25,7 +27,7 @@ function Home() {
         </div>
       </div>
 
-      <ListaPostagens />
+      <ListaProdutos />
     </>
   );
 }

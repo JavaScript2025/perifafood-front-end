@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import type Postagem from "../../../models/Postagem";
+import type Categoria from "../../../models/Categoria";
 import { buscar, authHeader } from "../../../services/Service";
-import CardPostagem from "../cardpostagem/CardPostagens";
+import CardCategoria from "../cardcategoria/CardCategoria";
 
-function ListaPostagens() {
+function ListaCategorias() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [postagens, setPostagens] = useState<Postagem[]>([]);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
@@ -20,19 +20,19 @@ function ListaPostagens() {
     }
   }, [token]);
 
-  async function buscarProdutos() {
+  async function carregar() {
     setIsLoading(true);
     try {
-      await buscar(`/produtos`, setPostagens, authHeader(token));
-    } catch (error: any) {
-      if (error.toString().includes("401")) handleLogout();
+      await buscar("/categorias", setCategorias, authHeader(token));
+    } catch (e: any) {
+      if (e.toString().includes("401")) handleLogout();
     } finally {
       setIsLoading(false);
     }
   }
 
   useEffect(() => {
-    buscarProdutos();
+    carregar();
   }, []);
 
   return (
@@ -43,8 +43,8 @@ function ListaPostagens() {
         </div>
       ) : (
         <div className="grid md:grid-cols-3 gap-4">
-          {postagens.map((post) => (
-            <CardPostagem key={post.id} postagem={post} />
+          {categorias.map((t) => (
+            <CardCategoria key={t.id} categoria={t} />
           ))}
         </div>
       )}
@@ -52,4 +52,4 @@ function ListaPostagens() {
   );
 }
 
-export default ListaPostagens;
+export default ListaCategorias;

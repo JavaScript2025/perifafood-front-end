@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import type Tema from "../../../models/Tema";
+import type Produto from "../../../models/Produto";
 import { buscar, authHeader } from "../../../services/Service";
-import CardTema from "../cardtema/CardTema";
+import CardProduto from "../cardproduto/CardProduto";
 
-function ListaTemas() {
+function ListaProdutos() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [temas, setTemas] = useState<Tema[]>([]);
+  const [produtos, setProdutos] = useState<Produto[]>([]);
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
@@ -20,19 +20,19 @@ function ListaTemas() {
     }
   }, [token]);
 
-  async function carregar() {
+  async function buscarProdutos() {
     setIsLoading(true);
     try {
-      await buscar("/categorias", setTemas, authHeader(token));
-    } catch (e: any) {
-      if (e.toString().includes("401")) handleLogout();
+      await buscar(`/produtos`, setProdutos, authHeader(token));
+    } catch (error: any) {
+      if (error.toString().includes("401")) handleLogout();
     } finally {
       setIsLoading(false);
     }
   }
 
   useEffect(() => {
-    carregar();
+    buscarProdutos();
   }, []);
 
   return (
@@ -43,8 +43,8 @@ function ListaTemas() {
         </div>
       ) : (
         <div className="grid md:grid-cols-3 gap-4">
-          {temas.map((t) => (
-            <CardTema key={t.id} tema={t} />
+          {produtos.map((post) => (
+            <CardProduto key={post.id} produto={post} />
           ))}
         </div>
       )}
@@ -52,4 +52,4 @@ function ListaTemas() {
   );
 }
 
-export default ListaTemas;
+export default ListaProdutos;

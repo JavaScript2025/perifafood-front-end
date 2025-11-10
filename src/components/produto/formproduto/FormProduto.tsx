@@ -8,19 +8,24 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import type Postagem from "../../../models/Postagem";
-import type Tema from "../../../models/Tema";
-import { atualizar, buscar, cadastrar, authHeader } from "../../../services/Service";
+import type Produto from "../../../models/Produto";
+import type Categoria from "../../../models/Categoria";
+import {
+  atualizar,
+  buscar,
+  cadastrar,
+  authHeader,
+} from "../../../services/Service";
 
-function FormPostagem() {
+function FormProduto() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [categorias, setCategorias] = useState<Tema[]>([]);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [categoriaId, setCategoriaId] = useState<number>(0);
 
-  const [postagem, setPostagem] = useState<Postagem>({
+  const [produto, setProduto] = useState<Produto>({
     id: 0,
     nome_produto: "",
     descricao: "",
@@ -50,8 +55,8 @@ function FormPostagem() {
 
   async function buscarProdutoPorId(id: string) {
     try {
-      await buscar(`/produtos/${id}`, setPostagem, authHeader(token));
-      setCategoriaId(Number(postagem?.categoria?.id ?? 0));
+      await buscar(`/produtos/${id}`, setProduto, authHeader(token));
+      setCategoriaId(Number(produto?.categoria?.id ?? 0));
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     }
@@ -62,9 +67,11 @@ function FormPostagem() {
     if (id) buscarProdutoPorId(id);
   }, [id]);
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setPostagem({
-      ...postagem,
+  function atualizarEstado(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    setProduto({
+      ...produto,
       [e.target.name]: e.target.value,
     });
   }
@@ -73,7 +80,7 @@ function FormPostagem() {
     const idSelecionado = Number(e.target.value);
     setCategoriaId(idSelecionado);
     const cat = categorias.find((c) => c.id === idSelecionado) || null;
-    setPostagem({ ...postagem, categoria: cat });
+    setProduto({ ...produto, categoria: cat });
   }
 
   async function gerarProduto(e: FormEvent<HTMLFormElement>) {
@@ -81,17 +88,17 @@ function FormPostagem() {
     setIsLoading(true);
 
     const payload = {
-      ...postagem,
-      categoria: postagem.categoria ? { id: postagem.categoria.id } : null,
+      ...produto,
+      categoria: produto.categoria ? { id: produto.categoria.id } : null,
     };
 
     try {
       if (id) {
-        await atualizar("/produtos", payload, setPostagem, authHeader(token));
+        await atualizar("/produtos", payload, setProduto, authHeader(token));
       } else {
-        await cadastrar("/produtos", payload, setPostagem, authHeader(token));
+        await cadastrar("/produtos", payload, setProduto, authHeader(token));
       }
-      navigate("/postagens");
+      navigate("/produtos");
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     } finally {
@@ -101,12 +108,17 @@ function FormPostagem() {
 
   return (
     <div className="container mx-auto max-w-2xl my-6">
-      <form onSubmit={gerarProduto} className="bg-white shadow rounded p-4 flex flex-col gap-3">
-        <h2 className="text-xl font-bold">{id ? "Editar produto" : "Novo produto"}</h2>
+      <form
+        onSubmit={gerarProduto}
+        className="bg-white shadow rounded p-4 flex flex-col gap-3"
+      >
+        <h2 className="text-xl font-bold">
+          {id ? "Editar produto" : "Novo produto"}
+        </h2>
 
         <input
           name="nome_produto"
-          value={postagem.nome_produto}
+          value={produto.nome_produto}
           onChange={atualizarEstado}
           placeholder="Nome do produto"
           className="border rounded p-2"
@@ -115,7 +127,7 @@ function FormPostagem() {
 
         <textarea
           name="descricao"
-          value={postagem.descricao}
+          value={produto.descricao}
           onChange={atualizarEstado}
           placeholder="Descrição"
           className="border rounded p-2"
@@ -126,7 +138,7 @@ function FormPostagem() {
           name="preco"
           type="number"
           step="0.01"
-          value={postagem.preco}
+          value={produto.preco}
           onChange={atualizarEstado}
           placeholder="Preço"
           className="border rounded p-2"
@@ -135,25 +147,43 @@ function FormPostagem() {
 
         <input
           name="foto"
-          value={postagem.foto}
+          value={produto.foto}
           onChange={atualizarEstado}
           placeholder="URL da imagem (opcional)"
           className="border rounded p-2"
         />
 
-        <select className="border rounded p-2" value={categoriaId} onChange={onChangeCategoria} required>
-          <option value={0} disabled>Selecione uma categoria</option>
+        <select
+          className="border rounded p-2"
+          value={categoriaId}
+          onChange={onChangeCategoria}
+          required
+        >
+          <option value={0} disabled>
+            Selecione uma categoria
+          </option>
           {categorias.map((c) => (
-            <option key={c.id} value={c.id}>{c.tipo}</option>
+            <option key={c.id} value={c.id}>
+              {c.tipo}
+            </option>
           ))}
         </select>
 
-        <button disabled={isLoading} className="bg-green-600 text-white rounded p-2">
-          {isLoading ? <ClipLoader size={18} /> : id ? "Atualizar" : "Cadastrar"}
+        <button
+          disabled={isLoading}
+          className="bg-green-600 text-white rounded p-2"
+        >
+          {isLoading ? (
+            <ClipLoader size={18} />
+          ) : id ? (
+            "Atualizar"
+          ) : (
+            "Cadastrar"
+          )}
         </button>
       </form>
     </div>
   );
 }
 
-export default FormPostagem;
+export default FormProduto;
