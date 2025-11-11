@@ -52,7 +52,7 @@ function Login() {
               id="usuario"
               name="usuario"
               placeholder="Usuario"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-slate-400 rounded p-2"
               value={usuarioLogin.usuario}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)
@@ -66,7 +66,7 @@ function Login() {
               id="senha"
               name="senha"
               placeholder="Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-slate-400 rounded p-2"
               value={usuarioLogin.senha}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)
@@ -75,8 +75,8 @@ function Login() {
           </div>
           <button
             type="submit"
-            className="rounded bg-indigo-400 flex justify-center
-                                   hover:bg-indigo-900 text-white w-1/2 py-2"
+            className="rounded bg-[#F42513] flex justify-center
+                                   hover:bg-[#FF751F] text-white w-1/2 py-2 cursor-pointer"
           >
             {isLoading ? (
               <ClipLoader color="#ffffff" size={24} />
@@ -89,13 +89,13 @@ function Login() {
 
           <p>
             Ainda não tem uma conta?{" "}
-            <Link to="/cadastro" className="text-indigo-800 hover:underline">
+            <Link to="/cadastro" className="text-[#F42513] hover:underline">
               Cadastre-se
             </Link>
           </p>
         </form>
         <div
-          className="bg-[url('https://i.imgur.com/ZZFAmzo.jpg')] lg:block hidden bg-no-repeat 
+          className="bg-[url('https://ik.imagekit.io/5u147mkwr/1IohXOz%20-%20Imgur.png?updatedAt=1762817270208')] lg:block hidden bg-no-repeat 
                             w-full min-h-screen bg-cover bg-center"
         ></div>
       </div>

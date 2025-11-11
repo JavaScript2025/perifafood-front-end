@@ -8,7 +8,8 @@ function ModalProduto() {
     <>
       <Popup
         trigger={
-          <button className="border rounded px-4 py-2 hover:bg-white hover:text-indigo-800 cursor-pointer">
+          <button className="border rounded-4xl px-5 py-3  text-white bg-[#FF751F]
+          hover:bg-orange-400 cursor-pointer">
             Novo Produto
           </button>
         }
