@@ -1,68 +1,63 @@
 import { Link } from "react-router-dom";
 import Depoimentos from "../../components/public/Depoimentos";
+import ComoFunciona from "../../components/public/ComoFunciona";
+import Faq from "../../components/public/FAQ";
 
 export default function PublicHome() {
   return (
-    <main className="min-h-screen bg-[#D95F3A]">
-      <header className="container mx-auto px-4 py-6 flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold text-[#F7E37B]">PerifaFood</h1>
+    <main className="min-h-screen bg-[#FFFFFF]">
+      <header className="container rounded-full bg-[#F2F2F2] mx-auto px-6 py-4 mt-2 flex items-center justify-between">
+        <h1 className="text-2xl font-extrabold text-[#260101]">PerifaFood</h1>
         <div className="flex gap-3">
           <Link
             to="/login"
-            className="border border-[#D9291A] bg-[#F7E37B] text-black  px-4 py-2 rounded hover:bg-[#D9291A] hover:text-white transition"
+            className="px-5 py-3 rounded-full text-white font-semibold bg-linear-to-r from-[#F27E63] to-[#F25E5E] hover:bg-orange-600 hover:text-white transition"
           >
             Entrar
           </Link>
           <Link
             to="/cadastro"
-            className="px-4 py-2 rounded bg-[#F7E37B] text-black hover:opacity-90 transition"
+            className="px-5 py-3 rounded-full text-white font-semibold bg-linear-to-r from-[#F27E63] to-[#F25E5E] hover:bg-orange-600 hover:text-white transition"
           >
             Cadastrar restaurante
           </Link>
         </div>
       </header>
 
-      <section className="container mx-auto px-4 py-10 grid md:grid-cols-2 gap-8 items-center">
+      <section className="bg-[#F2F2F2] rounded-xl container mx-auto mt-4 px-4 py-10 grid md:grid-cols-2 gap-8 items-center">
         <div className="space-y-4">
-          <h2 className="text-5xl font-extrabold leading-tight text-[#F7E37B]">
+          <h2 className="text-5xl font-extrabold font-sans leading-tight text-[#260101]">
             Delivery pensado para as periferias
           </h2>
-          <p className="text-lg  text-[#F7E37B]">
+          <p className="text-lg text-poppins  text-[#260101]">
             No PerifaFood, pequenos restaurantes cadastram seus pratos e alcançam clientes da
             comunidade com facilidade. Simples, direto e do seu jeito.
           </p>
           <div className="flex gap-3">
             <Link
               to="/login"
-              className="px-5 py-3 rounded text-black font-semibold border border-[#F7E37B] bg-[#F7E37B] hover:bg-[#F7E37B] hover:text-black transition"
+              className="px-5 py-3 rounded-full text-white font-semibold bg-linear-to-r from-[#F27E63] to-[#F25E5E] hover:bg-orange-600 hover:text-white transition"
             >
               Entrar para gerenciar
             </Link>
             <a
               href="#como-funciona"
-              className="px-5 py-3 rounded text-black font-semibold border border-[#F7E37B] bg-[#F7E37B] hover:bg-[#F7E37B] hover:text-black transition"
+              className="px-5 py-3 rounded-full text-white font-semibold bg-linear-to-r from-[#F27E63] to-[#F25E5E] hover:bg-orange-600 hover:text-white transition"
             >
               Como funciona
             </a>
           </div>
-        </div>
-
-        <div className="w-full h-64 md:h-80 bg-white/60 rounded-2xl border border-orange-200 flex items-center justify-center">
-          <span className="text-orange-700/80 font-semibold">
-            Seu restaurante em destaque 🍲
+        </div> 
+        
+        {/* <div className="w-full h-64 md:h-80 bg-white/60 rounded-2xl border border-orange-200 flex items-center justify-center">
+          <span className="text-orange-700/80 font-semibold h-48 w-full object-cover">
+            
           </span>
-        </div>
-      </section>
-
-      <section id="como-funciona" className="container mx-auto px-4 pb-16">
-        <h3 className="text-2xl font-bold mb-4">Como funciona</h3>
-        <ul className="grid md:grid-cols-3 gap-4">
-          <li className="rounded-full bg-white p-4 border">1. Cadastre seu restaurante</li>
-          <li className="rounded-full bg-white p-4 border">2. Publique seus produtos</li>
-          <li className="rounded-full bg-white p-4 border">3. Receba pedidos do bairro</li>
-        </ul>
+        </div> */}
       </section>
       <Depoimentos />
+      <ComoFunciona />
+      <Faq />
     </main>
     
   );

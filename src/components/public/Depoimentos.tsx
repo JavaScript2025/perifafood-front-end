@@ -1,21 +1,21 @@
 export default function Depoimentos() {
   const itens = [
     {
-      img: "/images/depoimentos/vanessa.webp",
+      img: "https://i.imgur.com/prLfpdz.jpeg",
       alt: "Vanessa, proprietária do Roni 46",
       texto:
         "Entrar no PerifaFood abriu portas pra mais visibilidade no bairro. Nosso faturamento subiu de forma significativa.",
       nome: "Vanessa — Roni 46",
     },
     {
-      img: "/images/depoimentos/keid.webp",
+      img: "https://i.imgur.com/8IIkTWU.jpeg",
       alt: "Keid, proprietária da Tapioca Reis Gourmet",
       texto:
         "Em menos de 2 anos foquei só na minha loja. Batemos +20k em um mês e viramos Super Restaurante.",
       nome: "Keid — Tapioca Reis Gourmet",
     },
     {
-      img: "/images/depoimentos/marilina.webp",
+      img: "https://i.imgur.com/wB1DS6U.jpeg",
       alt: "Marilina, proprietária da Green Tasty",
       texto:
         "Recuperei autonomia e o negócio cresceu. Conseguimos abrir a segunda unidade em São Paulo.",
@@ -24,12 +24,12 @@ export default function Depoimentos() {
   ];
 
   return (
-    <section className="bg-[#B51E16] px-4 md:px-24 py-12">
+    <section className="container rounded-xl bg-[#F2F2F2] mx-auto px-6 py-4 mt-4 flex items-center justify-between">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-white text-center font-bold antialiased md:text-[40px] md:leading-[48px] text-[20px] leading-[24px]">
+        <h2 className=" text-black text-center font-sans font-extrabold antialiased md:text-[40px] md:leading-[48px] text-[20px] leading-[24px]">
           O que os nossos parceiros dizem
-          <br className="hidden sm:block" />
-          sobre vender com o PerifaFood
+          <br className="hidden sm:block font-sans font-extrabold" />
+          sobre vender com o <span className="text-[#F27E63]">PerifaFood</span>
         </h2>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
