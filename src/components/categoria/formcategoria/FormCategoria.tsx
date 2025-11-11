@@ -95,7 +95,7 @@ function FormCategoria() {
         />
         <button
           disabled={isLoading}
-          className="bg-green-600 text-white rounded p-2"
+          className="bg-green-600 text-white rounded p-2 cursor-pointer"
         >
           {isLoading ? (
             <ClipLoader size={18} />
