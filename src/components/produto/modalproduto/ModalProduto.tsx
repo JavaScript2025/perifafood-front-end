@@ -13,9 +13,18 @@ function ModalProduto() {
           </button>
         }
         modal
+        lockScroll
+        closeOnEscape
+        overlayStyle={{
+          background: "rgba(0, 0, 0, 0.70)",
+          backdropFilter: "blur(5px)",
+        }}
         contentStyle={{
-          borderRadius: "1rem",
-          paddingBottom: "2rem",
+          background: "transparent",
+          padding: 0,
+          border: "none",
+          boxShadow: "none",
+          borderRadius: 0,
         }}
       >
         <FormProduto />

@@ -149,7 +149,7 @@ function FormProduto() {
           name="foto"
           value={produto.foto}
           onChange={atualizarEstado}
-          placeholder="URL da imagem (opcional)"
+          placeholder="URL da imagem (Foto do produto)"
           className="border rounded p-2"
         />
 
@@ -171,7 +171,7 @@ function FormProduto() {
 
         <button
           disabled={isLoading}
-          className="bg-green-600 text-white rounded p-2 cursor-pointer"
+          className="bg-red-600 text-white rounded p-2 cursor-pointer"
         >
           {isLoading ? (
             <ClipLoader size={18} />

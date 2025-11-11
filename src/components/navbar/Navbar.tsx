@@ -34,9 +34,6 @@ function Navbar() {
             <Link to="/categorias" className="hover:underline">
               Categorias
             </Link>
-            <Link to="/cadastrarcategoria" className="hover:underline">
-              Cadastrar categoria
-            </Link>
             <Link to="/perfil" className="hover:underline">
               Perfil
             </Link>
