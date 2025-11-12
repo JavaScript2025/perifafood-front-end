@@ -1,5 +1,5 @@
 {
-  "name": "blogpessoal",
+  "name": "perifafood",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -23,8 +23,8 @@
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@types/node": "^24.6.0",
-    "@types/react": "^19.1.16",
-    "@types/react-dom": "^19.1.9",
+    "@types/react": "^19.2.3",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.1.0",
     "autoprefixer": "^10.4.22",
     "eslint": "^9.36.0",

@@ -23,7 +23,7 @@ import PublicHome from "./pages/public/PublicHome"; // <<--- NOVO
 import "react-toastify/dist/ReactToastify.css";
 
 // Guard simples: só permite acesso se houver token
-function RequireAuth({ children }: { children: JSX.Element }) {
+function RequireAuth({ children }: { children: React.ReactNode }) {
   const { usuario } = useContext(AuthContext);
   if (!usuario?.token) return <Navigate to="/login" replace />;
   return children;
