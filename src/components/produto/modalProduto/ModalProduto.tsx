@@ -1,16 +1,14 @@
 import Popup from "reactjs-popup";
 
 import "reactjs-popup/dist/index.css";
-import FormProduto from "../formproduto/FormProduto";
+import FormProduto from "../formProduto/FormProduto";
 import Botao from "../../botao/Botao";
 
 function ModalProduto() {
   return (
     <>
       <Popup
-        trigger={
-<Botao variant="laranja">Novo Produto</Botao>
-        }
+        trigger={<Botao variant="laranja">Novo Produto</Botao>}
         modal
         lockScroll
         closeOnEscape

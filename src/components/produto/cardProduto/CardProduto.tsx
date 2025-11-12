@@ -1,5 +1,6 @@
 import type Produto from "../../../models/Produto";
-import { Link } from "react-router-dom";
+import ModalApagarProduto from "../../modais/ModalApagarProduto";
+import ModalEditarProduto from "../../modais/ModalEditarProduto"; // Corrigido
 
 interface CardProps {
   produto: Produto;

@@ -4,8 +4,8 @@ import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Produto from "../../../models/Produto";
 import { buscar, authHeader } from "../../../services/Service";
-import CardProduto from "../cardproduto/CardProduto";
-import ModalProduto from "../modalproduto/ModalProduto";
+import CardProduto from "../cardProduto/CardProduto";
+import ModalProduto from "../modalProduto/ModalProduto";
 
 interface ListaProdutosProps {
   showCreateButton?: boolean; 

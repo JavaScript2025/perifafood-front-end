@@ -17,9 +17,18 @@ import {
 } from "../../../services/Service";
 import Botao from "../../botao/Botao";
 
-function FormCategoria() {
+// Adicione esta interface
+interface FormCategoriaProps {
+  categoriaId?: number;
+}
+
+// Modifique a função para aceitar a prop
+function FormCategoria({ categoriaId }: FormCategoriaProps = {}) {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { id: urlId } = useParams<{ id: string }>();
+
+  // Use categoriaId da prop ou da URL
+  const id = categoriaId?.toString() || urlId;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [categoria, setCategoria] = useState<Categoria>({ id: 0, tipo: "" });
@@ -84,7 +93,7 @@ function FormCategoria() {
         className="bg-white shadow rounded p-4 flex flex-col gap-3"
       >
         <h2 className="text-xl font-bold">
-          {id ? "Editar categoria" : "Novo categoria"}
+          {id ? "Editar categoria" : "Nova categoria"}
         </h2>
         <input
           name="tipo"
@@ -95,15 +104,15 @@ function FormCategoria() {
           required
         />
 
-<Botao variant="vermelho" disabled={isLoading}>
-  {isLoading ? (
+        <Botao variant="vermelho" disabled={isLoading}>
+          {isLoading ? (
             <ClipLoader size={18} />
           ) : id ? (
             "Atualizar"
           ) : (
             "Cadastrar"
-          )}</Botao>
-      
+          )}
+        </Botao>
       </form>
     </div>
   );

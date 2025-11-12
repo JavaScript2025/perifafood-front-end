@@ -4,6 +4,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Produto from "../../../models/Produto";
 import { buscar, deletar, authHeader } from "../../../services/Service";
 import Botao from "../../botao/Botao";
+import Popup from "reactjs-popup";
 
 function DeletarProduto() {
   const navigate = useNavigate();
@@ -39,7 +40,9 @@ function DeletarProduto() {
     }
   }
 
-  return (
+
+
+  return (  
     <div className="container mx-auto max-w-xl my-6">
       <div className="bg-white shadow rounded p-4">
         <h2 className="text-xl font-bold mb-2">Confirmar exclusão</h2>
@@ -51,16 +54,13 @@ function DeletarProduto() {
           <Botao variant="vermelho" onClick={confirmar}>
             Sim
           </Botao>
-          <Botao
-            onClick={() => navigate("/produtos")}
-            variant="cinza"
-          >
+          <Botao onClick={() => navigate("/produtos")} variant="cinza">
             Não
           </Botao>
-
         </div>
       </div>
     </div>
+ 
   );
 }
 

@@ -1,4 +1,4 @@
-import ListaProdutos from "../../components/produto/listaprodutos/ListaProdutos";
+import ListaProdutos from "../../components/produto/listaProdutos/ListaProdutos";
 
 function Home() {
   return (

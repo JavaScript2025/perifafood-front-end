@@ -50,7 +50,9 @@ function ListaCategorias() {
         </div>
       )}
 
-      {!isLoading && categorias.length === 0 && <p>Nenhuma categoria cadastrada.</p>}
+      {!isLoading && categorias.length === 0 && (
+        <p>Nenhuma categoria cadastrada.</p>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {categorias.map((categoria) => (

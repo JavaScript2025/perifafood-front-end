@@ -18,9 +18,18 @@ import {
 } from "../../../services/Service";
 import Botao from "../../botao/Botao";
 
-function FormProduto() {
+// Adicione esta interface
+interface FormProdutoProps {
+  produtoId?: number;
+}
+
+// Modifique a função para receber a prop
+function FormProduto({ produtoId }: FormProdutoProps = {}) {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { id: urlId } = useParams<{ id: string }>();
+  
+  // Use produtoId da prop ou da URL
+  const id = produtoId?.toString() || urlId;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -171,14 +180,14 @@ function FormProduto() {
         </select>
 
         <Botao variant="vermelho" disabled={isLoading}>
-  {isLoading ? (
+          {isLoading ? (
             <ClipLoader size={18} />
           ) : id ? (
             "Atualizar"
           ) : (
             "Cadastrar"
-          )}</Botao>
-
+          )}
+        </Botao>
       </form>
     </div>
   );
