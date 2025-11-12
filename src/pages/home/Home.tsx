@@ -7,7 +7,7 @@ function Home() {
         <div
           className="
             rounded-xl container 
-            grid grid-cols-1 md:grid-cols-2 
+            grid grid-cols-1 md:grid-cols-2
             bg-[#F2F2F2] 
             items-center
           "
@@ -26,9 +26,9 @@ function Home() {
           {/* Imagem */}
           <div className="flex justify-center md:block hidden md:flex">
             <img
-              src="https://ik.imagekit.io/5u147mkwr/1IohXOz%20-%20Imgur.png?updatedAt=1762817270208"
+              src="https://i.imgur.com/1W7mmb7.png"
               alt="Imagem Página Home"
-              className="w-3/4 max-w-md"
+              className="w-2/4 max-w-md pr-10"
             />
           </div>
         </div>
