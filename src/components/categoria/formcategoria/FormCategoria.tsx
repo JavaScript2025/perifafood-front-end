@@ -23,7 +23,7 @@ interface FormCategoriaProps {
 }
 
 // Modifique a função para aceitar a prop
-function FormCategoria({ categoriaId }: FormCategoriaProps = {}) {
+function FormCategoria({ categoriaId, onSuccess }: FormCategoriaProps = {}) {
   const navigate = useNavigate();
   const { id: urlId } = useParams<{ id: string }>();
 
