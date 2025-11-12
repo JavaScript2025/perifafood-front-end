@@ -37,10 +37,7 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#FF9665] to-[#FF6663] flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Efeitos de fundo */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-black/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
+    <div className="min-h-screen container mx-auto rounded-4xl bg-gradient-to-r from-[#FF9665] to-[#F2F2F2] flex items-center justify-center p-4 relative overflow-hidden">
 
       {/* Card com 2 colunas */}
       <div className="w-full max-w-3xl ">

@@ -8,24 +8,6 @@ import FooterPublico from "../../components/public/FooterPublico";
 export default function PublicHome() {
   return (
     <main className="min-h-screen bg-[#FFFFFF]">
-      <header className="container rounded-full bg-[#F2F2F2] mx-auto px-6 py-4 mt-4 flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold text-[#260101]">PerifaFood</h1>
-        <div className="flex gap-3">
-          <Link
-            to="/login"
-            className="px-5 py-3 rounded-full text-white font-semibold bg-linear-to-r from-[#F27E63] to-[#F25E5E] hover:bg-orange-600 hover:text-white transition"
-          >
-            Entrar
-          </Link>
-          <Link
-            to="/cadastro"
-            className="px-5 py-3 rounded-full text-white font-semibold bg-linear-to-r from-[#F27E63] to-[#F25E5E] hover:bg-orange-600 hover:text-white transition"
-          >
-            Cadastrar restaurante
-          </Link>
-        </div>
-      </header>
-
       <section className="bg-[#F2F2F2] rounded-xl container mx-auto mt-4 px-4 py-10 grid md:grid-cols-2 gap-8 items-center">
         <div className="space-y-4">
           <h2 className="text-5xl font-extrabold font-sans leading-tight text-[#260101]">
@@ -61,7 +43,6 @@ export default function PublicHome() {
       <Depoimentos />
       <ComoFunciona />
       <Faq />
-      <FooterPublico />
     </main>
   );
 }

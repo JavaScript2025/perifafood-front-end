@@ -27,7 +27,6 @@ function ModalEditarProduto({ produtoId }: ModalEditarProdutoProps) {
           borderRadius: 0,
         }}
       >
-        {/* Passar o ID do produto para o formulário */}
         <FormProduto produtoId={produtoId} />
       </Popup>
     </>
