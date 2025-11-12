@@ -2,11 +2,17 @@ import type Produto from "../../../models/Produto";
 import ModalApagarProduto from "../../modais/ModalApagarProduto";
 import ModalEditarProduto from "../../modais/ModalEditarProduto"; // Corrigido
 
-interface CardProps {
+interface CardProdutoProps {
   produto: Produto;
+  onDelete?: () => void;
+  onEdit?: () => void;
 }
 
-export default function CardProdutos({ produto }: CardProps) {
+export default function CardProduto({
+  produto,
+  onDelete,
+  onEdit,
+}: CardProdutoProps) {
   return (
     <div className="shadow-sm rounded-lg overflow-hidden flex flex-col bg-white border border-gray-200 hover:shadow-md transition-all duration-200">
       {/* Imagem */}
@@ -34,9 +40,9 @@ export default function CardProdutos({ produto }: CardProps) {
 
       {/* Ações */}
       <div className="p-3 flex gap-2 justify-end">
-        <ModalEditarProduto produtoId={produto.id} />
+        <ModalEditarProduto produtoId={produto.id} onEdit={onEdit} />
 
-        <ModalApagarProduto produtoId={produto.id} />
+        <ModalApagarProduto produtoId={produto.id} onDelete={onDelete} />
       </div>
     </div>
   );

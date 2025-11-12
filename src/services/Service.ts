@@ -46,10 +46,10 @@ export const atualizar = async (
   setDados(resposta.data);
 };
 
-export const deletar = async (url: string, header: object) => {
-  await api.delete(url, header);
+export const deletar = async (url: string, header: {}) => {
+  const resposta = await api.delete(url, header);
+  return resposta.data;
 };
-
 export const cadastrarUsuario = async (
   url: string,
   dados: object,

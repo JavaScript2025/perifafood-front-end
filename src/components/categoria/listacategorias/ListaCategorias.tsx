@@ -40,7 +40,6 @@ function ListaCategorias() {
     <div className="container mx-auto px-4 py-6 bg-[#F2F2F2] rounded-xl min-h-[calc(100vh-230px)]">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Categorias</h1>
-        {/* Botão que abre o modal */}
         <ModalCategoria />
       </div>
 
@@ -56,7 +55,12 @@ function ListaCategorias() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {categorias.map((categoria) => (
-          <CardCategoria key={categoria.id} categoria={categoria} />
+          <CardCategoria
+            key={categoria.id}
+            categoria={categoria}
+            onDelete={carregar} // Passa a função carregar para recarregar após deletar
+            onEdit={carregar}
+          />
         ))}
       </div>
     </div>

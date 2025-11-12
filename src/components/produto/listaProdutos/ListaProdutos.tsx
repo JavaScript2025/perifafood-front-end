@@ -8,8 +8,8 @@ import CardProduto from "../cardProduto/CardProduto";
 import ModalProduto from "../modalProduto/ModalProduto";
 
 interface ListaProdutosProps {
-  showCreateButton?: boolean; 
-  showTitle?: boolean;        
+  showCreateButton?: boolean;
+  showTitle?: boolean;
 }
 
 function ListaProdutos({
@@ -51,7 +51,11 @@ function ListaProdutos({
     <div className="container bg-[#F2F2F2] rounded-xl mx-auto mt-4 px-4 py-6">
       {(showCreateButton || showTitle) && (
         <div className="mb-6 flex items-center justify-between">
-          {showTitle ? <h2 className="text-2xl font-bold">Produtos</h2> : <div />}
+          {showTitle ? (
+            <h2 className="text-2xl font-bold">Produtos</h2>
+          ) : (
+            <div />
+          )}
           {showCreateButton && <ModalProduto />}
         </div>
       )}
@@ -63,7 +67,12 @@ function ListaProdutos({
       ) : (
         <div className="grid md:grid-cols-3 gap-4">
           {produtos.map((post) => (
-            <CardProduto key={post.id} produto={post} />
+            <CardProduto
+              key={post.id}
+              produto={post}
+              onEdit={buscarProdutos}
+              onDelete={buscarProdutos}
+            />
           ))}
         </div>
       )}

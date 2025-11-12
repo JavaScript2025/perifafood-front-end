@@ -5,10 +5,19 @@ import type Categoria from "../../../models/Categoria";
 import { buscar, deletar, authHeader } from "../../../services/Service";
 import Botao from "../../botao/Botao";
 
-function DeletarCategoria() {
+interface DeletarCategoriaProps {
+  categoriaId?: number;
+  onDelete?: () => void; // Callback para fechar modal e atualizar lista
+}
+
+function DeletarCategoria({ categoriaId, onDelete }: DeletarCategoriaProps = {}) {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { id: urlId } = useParams<{ id: string }>();
+  
+  const id = categoriaId?.toString() || urlId;
+
   const [categoria, setCategoria] = useState<Categoria | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
@@ -21,6 +30,7 @@ function DeletarCategoria() {
 
   useEffect(() => {
     async function carregar() {
+      if (!id) return;
       try {
         await buscar(`/categorias/${id}`, setCategoria, authHeader(token));
       } catch (e: any) {
@@ -31,11 +41,26 @@ function DeletarCategoria() {
   }, [id]);
 
   async function confirmar() {
+    if (!id) return;
+    setIsDeleting(true);
     try {
       await deletar(`/categorias/${id}`, authHeader(token));
-      navigate("/categorias");
+      
+      // Se tem callback (modal), chama ele
+      if (onDelete) {
+        onDelete();
+      } else {
+        // Se não tem (página), navega
+        navigate("/categorias");
+      }
     } catch (e: any) {
-      if (e.toString().includes("401")) handleLogout();
+      if (e.toString().includes("401")) {
+        handleLogout();
+      } else {
+        alert("Erro ao deletar categoria!");
+      }
+    } finally {
+      setIsDeleting(false);
     }
   }
 
@@ -48,12 +73,13 @@ function DeletarCategoria() {
           <strong>{categoria?.tipo}</strong>?
         </p>
         <div className="mt-4 flex gap-2">
-          <Botao variant="vermelho" onClick={confirmar}>
-            Sim
+          <Botao variant="vermelho" onClick={confirmar} disabled={isDeleting}>
+            {isDeleting ? "Excluindo..." : "Sim"}
           </Botao>
           <Botao
-            onClick={() => navigate("/categorias")}
+            onClick={() => onDelete ? onDelete() : navigate("/categorias")}
             variant="cinza"
+            disabled={isDeleting}
           >
             Não
           </Botao>

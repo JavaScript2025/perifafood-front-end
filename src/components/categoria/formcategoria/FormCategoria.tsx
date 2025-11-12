@@ -17,9 +17,9 @@ import {
 } from "../../../services/Service";
 import Botao from "../../botao/Botao";
 
-// Adicione esta interface
 interface FormCategoriaProps {
   categoriaId?: number;
+  onSuccess?: () => void;
 }
 
 // Modifique a função para aceitar a prop
@@ -78,7 +78,10 @@ function FormCategoria({ categoriaId }: FormCategoriaProps = {}) {
           authHeader(token)
         );
       }
-      navigate("/categorias");
+
+      // ✅ chama a função de sucesso (para fechar a modal e atualizar a lista)
+      if (onSuccess) onSuccess();
+      else navigate("/categorias");
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     } finally {

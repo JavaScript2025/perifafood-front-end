@@ -18,17 +18,15 @@ import {
 } from "../../../services/Service";
 import Botao from "../../botao/Botao";
 
-// Adicione esta interface
 interface FormProdutoProps {
   produtoId?: number;
+  onSuccess?: () => void;
 }
 
-// Modifique a função para receber a prop
-function FormProduto({ produtoId }: FormProdutoProps = {}) {
+const FormProduto: React.FC<FormProdutoProps> = ({ produtoId, onSuccess }) => {
   const navigate = useNavigate();
   const { id: urlId } = useParams<{ id: string }>();
-  
-  // Use produtoId da prop ou da URL
+
   const id = produtoId?.toString() || urlId;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,6 +51,7 @@ function FormProduto({ produtoId }: FormProdutoProps = {}) {
       alert("Você precisa estar logado!");
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   async function carregarCategorias() {
@@ -63,18 +62,26 @@ function FormProduto({ produtoId }: FormProdutoProps = {}) {
     }
   }
 
-  async function buscarProdutoPorId(id: string) {
+  async function buscarProdutoPorId(idParam: string) {
     try {
-      await buscar(`/produtos/${id}`, setProduto, authHeader(token));
-      setCategoriaId(Number(produto?.categoria?.id ?? 0));
+      await buscar(`/produtos/${idParam}`, setProduto, authHeader(token));
+      // depois de setProduto, garantir que categoriaId seja atualizado a partir do produto retornado
+      // como buscar é assíncrono, pegamos a resposta via state - portanto usar setTimeout pequeno
+      // ou ajustar buscar para retornar o resultado. Aqui, vamos atualizar usando o produto vindo do state através de useEffect:
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     }
   }
 
+  // quando o produto muda (após buscar), atualiza categoriaId
+  useEffect(() => {
+    setCategoriaId(Number(produto?.categoria?.id ?? 0));
+  }, [produto]);
+
   useEffect(() => {
     carregarCategorias();
     if (id) buscarProdutoPorId(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   function atualizarEstado(
@@ -83,14 +90,14 @@ function FormProduto({ produtoId }: FormProdutoProps = {}) {
     setProduto({
       ...produto,
       [e.target.name]: e.target.value,
-    });
+    } as Produto);
   }
 
   function onChangeCategoria(e: ChangeEvent<HTMLSelectElement>) {
     const idSelecionado = Number(e.target.value);
     setCategoriaId(idSelecionado);
     const cat = categorias.find((c) => c.id === idSelecionado) || null;
-    setProduto({ ...produto, categoria: cat });
+    setProduto({ ...produto, categoria: cat } as Produto);
   }
 
   async function gerarProduto(e: FormEvent<HTMLFormElement>) {
@@ -108,7 +115,13 @@ function FormProduto({ produtoId }: FormProdutoProps = {}) {
       } else {
         await cadastrar("/produtos", payload, setProduto, authHeader(token));
       }
-      navigate("/produtos");
+
+      // chama callback de sucesso se existir, caso contrário navega
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        navigate("/produtos");
+      }
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     } finally {
@@ -191,6 +204,6 @@ function FormProduto({ produtoId }: FormProdutoProps = {}) {
       </form>
     </div>
   );
-}
+};
 
 export default FormProduto;

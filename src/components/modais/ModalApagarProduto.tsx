@@ -1,17 +1,27 @@
+import { useState } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Botao from "../botao/Botao";
-
 import DeletarProduto from "../produto/deletarProduto/DeletarProduto";
-// Importe o componente de deletar que você usa
 
 interface ModalApagarProdutoProps {
   produtoId: number;
+  onDelete?: () => void;
 }
 
-function ModalApagarProduto({ produtoId }: ModalApagarProdutoProps) {
+function ModalApagarProduto({ produtoId, onDelete }: ModalApagarProdutoProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDelete = () => {
+    setIsOpen(false);
+    if (onDelete) onDelete();
+  };
+
   return (
     <Popup
+      open={isOpen}
+      onOpen={() => setIsOpen(true)}
+      onClose={() => setIsOpen(false)}
       trigger={<Botao variant="vermelho">Apagar</Botao>}
       modal
       lockScroll
@@ -28,7 +38,7 @@ function ModalApagarProduto({ produtoId }: ModalApagarProdutoProps) {
         borderRadius: 0,
       }}
     >
-      <DeletarProduto produtoId={produtoId} />
+      <DeletarProduto produtoId={produtoId} onDelete={handleDelete} />
     </Popup>
   );
 }
