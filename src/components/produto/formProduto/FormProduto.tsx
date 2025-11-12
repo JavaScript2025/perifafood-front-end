@@ -179,7 +179,7 @@ function FormProduto({ produtoId }: FormProdutoProps = {}) {
           ))}
         </select>
 
-        <Botao variant="vermelho" disabled={isLoading}>
+        <Botao variant="laranja" disabled={isLoading}>
           {isLoading ? (
             <ClipLoader size={18} />
           ) : id ? (

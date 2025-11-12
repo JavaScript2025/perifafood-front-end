@@ -10,3 +10,14 @@
                "Segoe UI Emoji";
 }
 
+/* Corrige fundo azulado do autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+  -webkit-text-fill-color: #1f2937 !important; /* texto cinza escuro */
+  box-shadow: 0 0 0px 1000px rgba(255,255,255,0.1) inset !important;
+}
+
+

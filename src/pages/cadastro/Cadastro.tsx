@@ -1,5 +1,8 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { User, Mail, Image as ImageIcon, Lock, Eye, EyeOff, MailIcon } from "lucide-react";
+
 import Botao from "../../components/botao/Botao";
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
@@ -8,8 +11,9 @@ function Cadastro() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const [confirmarSenha, setConfirmarSenha] = useState<string>("");
+  const [showSenha, setShowSenha] = useState<boolean>(false);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
   const [usuario, setUsuario] = useState<Usuario>({
     id: 0,
@@ -52,6 +56,8 @@ function Cadastro() {
         alert("Usuário cadastrado com sucesso!");
       } catch (error) {
         alert("Erro ao cadastrar usuário!");
+      } finally {
+        setIsLoading(false);
       }
     } else {
       alert(
@@ -60,129 +66,153 @@ function Cadastro() {
       setUsuario({ ...usuario, senha: "" });
       setConfirmarSenha("");
     }
-
-    setIsLoading(false);
   }
 
   return (
-    <>
-      <div
-        className="grid grid-cols-1 lg:grid-cols-2 h-screen
-            place-items-center font-bold"
-      >
-        <div
-          className="bg-[url('https://ik.imagekit.io/5u147mkwr/1IohXOz%20-%20Imgur.png?updatedAt=1762817270208')] lg:block hidden bg-no-repeat
-                        w-full min-h-screen bg-cover bg-center"
-        ></div>
+    <div className="min-h-screen bg-gradient-to-r from-[#FF9665] to-[#FF6663] flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Efeitos de fundo */}
+      <div className="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-black/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
-        <form
-          className="flex justify-center items-center flex-col w-2/3 gap-3"
-          onSubmit={cadastrarNovoUsuario}
-        >
-          <h2 className="text-slate-800 text-5xl">Cadastrar</h2>
-
-          <div className="flex flex-col w-full">
-            <label htmlFor="nome">Nome</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              placeholder="Nome"
-              className="border-2 border-slate-400 rounded p-2"
-              value={usuario.nome}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                atualizarEstado(e)
-              }
-            />
+      {/* Card de Cadastro */}
+      <div className="w-full max-w-lg relative z-10">
+        <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 shadow-lg border border-white/30">
+          {/* Header */}
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-bold text-gray-800 mb-1">Cadastrar</h1>
+            <p className="text-sm text-gray-700">Crie sua conta para começar</p>
           </div>
 
-          <div className="flex flex-col w-full">
-            <label htmlFor="usuario">Usuário</label>
-            <input
-              type="text"
-              id="usuario"
-              name="usuario"
-              placeholder="Usuario"
-              className="border-2 border-slate-400 rounded p-2"
-              value={usuario.usuario}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                atualizarEstado(e)
-              }
-            />
-          </div>
+          {/* Formulário */}
+          <form onSubmit={cadastrarNovoUsuario} className="space-y-4">
+            {/* Nome */}
+            <div className="space-y-2">
+              <label htmlFor="nome" className="sr-only">Nome</label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#FF6663]" />
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  placeholder="Nome"
+                  className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/40 rounded-xl text-gray-800 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9665] transition-all backdrop-blur-sm"
+                  value={usuario.nome}
+                  onChange={atualizarEstado}
+                  required
+                />
+              </div>
+            </div>
 
-          <div className="flex flex-col w-full">
-            <label htmlFor="foto">Foto</label>
-            <input
-              type="text"
-              id="foto"
-              name="foto"
-              placeholder="Foto"
-              className="border-2 border-slate-400 rounded p-2"
-              value={usuario.foto}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                atualizarEstado(e)
-              }
-            />
-          </div>
+            {/* Usuário (email) */}
+            <div className="space-y-2">
+              <label htmlFor="usuario" className="sr-only">Usuário</label>
+              <div className="relative">
+                <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#FF6663]" />
+                <input
+                  type="email"
+                  id="usuario"
+                  name="usuario"
+                  placeholder="Email"
+                  className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/40 rounded-xl text-gray-800 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9665] transition-all backdrop-blur-sm"
+                  value={usuario.usuario}
+                  onChange={atualizarEstado}
+                  required
+                />
+              </div>
+            </div>
 
-          {/* <div className="flex flex-col w-full">
-            <label htmlFor="endereco">Endereço</label>
-            <input
-              type="text"
-              id="endereco"
-              name="endereco"
-              placeholder="Endereço"
-              className="border-2 border-slate-400 rounded p-3"
-              value={usuario.endereco}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                atualizarEstado(e)
-              }
-            />
-          </div> */}
+            {/* Foto */}
+            <div className="space-y-2">
+              <label htmlFor="foto" className="sr-only">Foto (URL)</label>
+              <div className="relative">
+                <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#FF6663]" />
+                <input
+                  type="text"
+                  id="foto"
+                  name="foto"
+                  placeholder="URL da foto (opcional)"
+                  className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/40 rounded-xl text-gray-800 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9665] transition-all backdrop-blur-sm"
+                  value={usuario.foto}
+                  onChange={atualizarEstado}
+                />
+              </div>
+            </div>
 
-          <div className="flex flex-col w-full">
-            <label htmlFor="senha">Senha</label>
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              placeholder="Senha"
-              className="border-2 border-slate-400 rounded p-2"
-              value={usuario.senha}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                atualizarEstado(e)
-              }
-            />
-          </div>
+            {/* Senha */}
+            <div className="space-y-2">
+              <label htmlFor="senha" className="sr-only">Senha</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#FF6663]" />
+                <input
+                  type={showSenha ? "text" : "password"}
+                  id="senha"
+                  name="senha"
+                  placeholder="Senha (mín. 8 caracteres)"
+                  className="w-full pl-11 pr-12 py-3 bg-white/10 border border-white/40 rounded-xl text-gray-800 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9665] transition-all backdrop-blur-sm"
+                  value={usuario.senha}
+                  onChange={atualizarEstado}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowSenha(!showSenha)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-800 transition-colors"
+                >
+                  {showSenha ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
 
-          <div className="flex flex-col w-full">
-            <label htmlFor="confirmarSenha">Confirmar Senha</label>
-            <input
-              type="password"
-              id="confirmarSenha"
-              name="confirmarSenha"
-              placeholder="Confirmar Senha"
-              className="border-2 border-slate-400 rounded p-2"
-              value={confirmarSenha}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleConfirmarSenha(e)
-              }
-            />
-          </div>
+            {/* Confirmar Senha */}
+            <div className="space-y-2">
+              <label htmlFor="confirmarSenha" className="sr-only">Confirmar Senha</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#FF6663]" />
+                <input
+                  type={showConfirm ? "text" : "password"}
+                  id="confirmarSenha"
+                  name="confirmarSenha"
+                  placeholder="Confirmar Senha"
+                  className="w-full pl-11 pr-12 py-3 bg-white/10 border border-white/40 rounded-xl text-gray-800 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9665] transition-all backdrop-blur-sm"
+                  value={confirmarSenha}
+                  onChange={handleConfirmarSenha}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-800 transition-colors"
+                >
+                  {showConfirm ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
 
-          <div className="flex justify-end w-full gap-1 mt-4">
-            <Botao type="submit" variant="laranja" isLoading={isLoading}>
-              Cadastrar
-            </Botao>
+            {/* Ações */}
+            <div className="flex justify-end w-full gap-3 mt-4">
+              <Botao type="submit" variant="laranja" className="flex-1" isLoading={isLoading}>
+                {isLoading ? <ClipLoader color="#fff" size={18} /> : "Cadastrar"}
+              </Botao>
 
-            <Botao variant="vermelho" onClick={retornar}>
-              Cancelar
-            </Botao>
-          </div>
-        </form>
+              <Botao variant="vermelho" onClick={retornar} className="px-6">
+                Cancelar
+              </Botao>
+            </div>
+          </form>
+
+          {/* Footer */}
+          <p className="text-center text-sm text-gray-700 mt-10">
+            Já tem uma conta?{" "}
+            <Link
+              to="/login"
+              className="text-[#FF6663] hover:underline font-medium"
+            >
+              Faça o login aqui!
+            </Link>
+          </p>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

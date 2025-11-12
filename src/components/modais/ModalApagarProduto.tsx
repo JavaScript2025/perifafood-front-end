@@ -1,7 +1,8 @@
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Botao from "../botao/Botao";
-import FormProduto from "../produto/formProduto/FormProduto";
+
+import DeletarProduto from "../produto/deletarProduto/DeletarProduto";
 // Importe o componente de deletar que você usa
 
 interface ModalApagarProdutoProps {
@@ -27,7 +28,7 @@ function ModalApagarProduto({ produtoId }: ModalApagarProdutoProps) {
         borderRadius: 0,
       }}
     >
-      <FormProduto produtoId={produtoId} />
+      <DeletarProduto produtoId={produtoId} />
     </Popup>
   );
 }

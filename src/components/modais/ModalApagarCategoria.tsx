@@ -2,6 +2,7 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Botao from "../botao/Botao";
 import FormCategoria from "../categoria/formcategoria/FormCategoria";
+import DeletarCategoria from "../categoria/deletarcategoria/DeletarCategoria";
 
 // Importe o componente de deletar que você usa
 
@@ -29,7 +30,7 @@ function ModalApagarCategoria({ categoriaId }: ModalApagarCategoriaProps) {
           borderRadius: 0,
         }}
       >
-        <FormCategoria categoriaId={categoriaId} />
+        <DeletarCategoria categoriaId={categoriaId} />
       </Popup>
     </>
   );
