@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
-import Depoimentos from "../../components/public/Depoimentos";
-import ComoFunciona from "../../components/public/ComoFunciona";
-import Faq from "../../components/public/Faq";
 
+import { Link } from "react-router-dom";
+import ComoFunciona from "../../components/public/ComoFunciona";
+import Depoimentos from "../../components/public/Depoimentos";
+import Faq from "../../components/public/Faq";
+import FooterPublico from "../../components/public/FooterPublico";
 
 export default function PublicHome() {
   return (
     <main className="min-h-screen bg-[#FFFFFF]">
-      <header className="container rounded-full bg-[#F2F2F2] mx-auto px-6 py-4 mt-2 flex items-center justify-between">
+      <header className="container rounded-full bg-[#F2F2F2] mx-auto px-6 py-4 mt-4 flex items-center justify-between">
         <h1 className="text-2xl font-extrabold text-[#260101]">PerifaFood</h1>
         <div className="flex gap-3">
           <Link
@@ -31,8 +32,9 @@ export default function PublicHome() {
             Delivery pensado para as periferias
           </h2>
           <p className="text-lg text-poppins  text-[#260101]">
-            No PerifaFood, pequenos restaurantes cadastram seus pratos e alcançam clientes da
-            comunidade com facilidade. Simples, direto e do seu jeito.
+            No PerifaFood, pequenos restaurantes cadastram seus pratos e
+            alcançam clientes da comunidade com facilidade. Simples, direto e do
+            seu jeito.
           </p>
           <div className="flex gap-3">
             <Link
@@ -48,11 +50,8 @@ export default function PublicHome() {
               Como funciona
             </a>
           </div>
+        </div>
 
-
-          
-        </div> 
-        
         {/* <div className="w-full h-64 md:h-80 bg-white/60 rounded-2xl border border-orange-200 flex items-center justify-center">
           <span className="text-orange-700/80 font-semibold h-48 w-full object-cover">
             
@@ -62,7 +61,7 @@ export default function PublicHome() {
       <Depoimentos />
       <ComoFunciona />
       <Faq />
+      <FooterPublico />
     </main>
-    
   );
 }

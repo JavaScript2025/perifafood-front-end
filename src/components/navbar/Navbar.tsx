@@ -2,7 +2,6 @@ import { useContext, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ToastAlerta } from "../../utils/ToastAlerta";
-import { Hamburger } from "@phosphor-icons/react";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -21,24 +20,24 @@ function Navbar() {
     component = (
       <div
         className="w-full flex justify-center py-4
-            			   bg-[#F27E63] text-white"
+            			   bg-[#FFFFFF] text-white"
       >
-        <div className="container flex justify-between text-lg mx-8 font-sans">
-          <Link to="/home" className="text-1xl font-bold flex gap-2 ">
-            Perifa Food <Hamburger size={24} color="#ffffff" />
+        <div className="container text-black rounded-full bg-[#F2F2F2] mx-auto px-6 py-4 mt-2 flex items-center justify-between">
+          <Link to="/home" className="text-2xl font-extrabold text-[#260101] hover:hover:text-[#F27E63] ">
+            PerifaFood
           </Link>
 
           <div className="flex gap-4">
-            <Link to="/produtos" className="hover:underline">
+            <Link to="/produtos" className="hover:text-[#F27E63]">
               Produtos
             </Link>
-            <Link to="/categorias" className="hover:underline">
+            <Link to="/categorias" className="hover:text-[#F27E63]">
               Categorias
             </Link>
-            <Link to="/perfil" className="hover:underline">
+            <Link to="/perfil" className="hover:text-[#F27E63]">
               Perfil
             </Link>
-            <Link to="" onClick={logout} className="hover:underline">
+            <Link to="" onClick={logout} className="hover:text-[#F27E63]">
               Sair
             </Link>
           </div>

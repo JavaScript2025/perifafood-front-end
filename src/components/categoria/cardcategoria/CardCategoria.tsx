@@ -7,7 +7,7 @@ interface CardProps {
 
 export default function CardCategoria({ categoria }: CardProps) {
   return (
-    <div className="shadow rounded p-4 flex flex-col justify-between">
+    <div className="shadow rounded p-4 flex flex-col justify-between bg-white">
       <div>
         <h3 className="font-bold text-lg">{categoria.tipo}</h3>
         <p className="opacity-70 text-sm">ID: {categoria.id}</p>

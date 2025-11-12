@@ -5,7 +5,6 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { buscar, authHeader } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
-import FormCategoria from "../formcategoria/FormCategoria";
 import ModalCategoria from "../modalcategoria/ModalCategoria";
 
 function ListaCategorias() {
@@ -38,7 +37,7 @@ function ListaCategorias() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6 bg-[#F2F2F2] rounded-xl min-h-[calc(100vh-230px)]">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Categorias</h1>
         {/* Botão que abre o modal */}

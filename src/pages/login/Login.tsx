@@ -42,7 +42,7 @@ function Login() {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold ">
         <form
-          className="flex justify-center items-center flex-col w-1/2 gap-4"
+          className="bg-[#f2f2f2] rounded-xl flex justify-center items-center px-10 py-20 flex-col w-1/2 gap-4"
           onSubmit={login}
         >
           <h2 className="text-slate-900 text-5xl ">Entrar</h2>
@@ -53,7 +53,7 @@ function Login() {
               id="usuario"
               name="usuario"
               placeholder="Usuario"
-              className="border-2 border-slate-400 rounded p-2"
+              className="border-2 border-slate-400 rounded-xl p-2"
               value={usuarioLogin.usuario}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)
@@ -67,7 +67,7 @@ function Login() {
               id="senha"
               name="senha"
               placeholder="Senha"
-              className="border-2 border-slate-400 rounded p-2"
+              className="border-2 border-slate-400 rounded-xl p-2"
               value={usuarioLogin.senha}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)

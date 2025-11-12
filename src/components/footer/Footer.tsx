@@ -1,9 +1,9 @@
 import {
   FacebookLogoIcon,
-  Hamburger,
   InstagramLogoIcon,
   LinkedinLogoIcon,
 } from "@phosphor-icons/react";
+import { HamburgerIcon } from "lucide-react";
 import { useContext, type ReactNode } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -16,8 +16,8 @@ function Footer() {
 
   if (usuario.token !== "") {
     component = (
-      <footer className="py-12 px-4 bg-muted border-t border-gray-100 border-border bg-[#F27E63] text-white font-sans">
-        <div className="container mx-auto max-w-6xl">
+      <footer className=" container mx-auto mb-4 rounded-xl pb-2 py-10 px-4 bg-muted mt-4 bg-gradient-to-r from-[#FF9665] to-[#FF6663] text-white font-sans">
+        <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 mb-8">
             <div className="space-y-4">
               <a
@@ -25,7 +25,7 @@ function Footer() {
                 className="flex items-center gap-2 text-xl font-bold text-primary transition-colors hover:text-primary/80"
               >
                 <p className=" flex gap-2">
-                  Perifa Food <Hamburger size={25} color="#f8f7f7" />
+                  Perifa Food <HamburgerIcon size={25} color="white" />
                 </p>
               </a>
               <p className="text-sm text-muted-foreground">
@@ -57,9 +57,9 @@ function Footer() {
               </a>
             </div>
           </div>
-          <div className="pt-8 border-t border-border border-gray-300 text-center text-sm text-muted-foreground">
-            <p>© {data} Perifa Food. Todos os direitos reservados.</p>
-          </div>
+        </div>
+        <div className="pt-8 border-t border-border border-white text-center text-sm text-muted-foreground">
+          <p>© {data} Perifa Food. Todos os direitos reservados.</p>
         </div>
       </footer>
     );

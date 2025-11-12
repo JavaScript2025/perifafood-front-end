@@ -1,9 +1,8 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
+import Botao from "../../components/botao/Botao";
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
-import Botao from "../../components/botao/Botao";
 
 function Cadastro() {
   const navigate = useNavigate();
@@ -112,7 +111,7 @@ function Cadastro() {
             />
           </div>
 
-          {/* <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full">
             <label htmlFor="foto">Foto</label>
             <input
               type="text"
@@ -127,7 +126,7 @@ function Cadastro() {
             />
           </div>
 
-          <div className="flex flex-col w-full">
+          {/* <div className="flex flex-col w-full">
             <label htmlFor="endereco">Endereço</label>
             <input
               type="text"
@@ -172,19 +171,13 @@ function Cadastro() {
             />
           </div>
 
-          <div className="flex justify-around w-full gap-4 mt-4">
-            <Botao variant="vermelho" onClick={retornar}>
-              Cancelar
+          <div className="flex justify-end w-full gap-1 mt-4">
+            <Botao type="submit" variant="laranja" isLoading={isLoading}>
+              Cadastrar
             </Botao>
 
-            <Botao
-              type="submit"
-              variant="laranja"
-              isLoading={isLoading}
-             
-              
-            >
-              Cadastrar
+            <Botao variant="vermelho" onClick={retornar}>
+              Cancelar
             </Botao>
           </div>
         </form>
