@@ -2,8 +2,8 @@ import {
   FacebookLogoIcon,
   InstagramLogoIcon,
   LinkedinLogoIcon,
+  HamburgerIcon
 } from "@phosphor-icons/react";
-import { HamburgerIcon } from "lucide-react";
 import { useContext, type ReactNode } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 

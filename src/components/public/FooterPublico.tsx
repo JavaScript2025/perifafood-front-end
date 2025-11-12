@@ -2,8 +2,8 @@ import {
   FacebookLogoIcon,
   InstagramLogoIcon,
   LinkedinLogoIcon,
+  HamburgerIcon,
 } from "@phosphor-icons/react";
-import { HamburgerIcon } from "lucide-react";
 
 function FooterPublico() {
   const data = new Date().getFullYear();
