@@ -4,9 +4,9 @@ import { ToastContainer } from "react-toastify";
 
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
-import DeletarProduto from "./components/produto/deletarproduto/DeletarProduto";
-import FormProduto from "./components/produto/formproduto/FormProduto";
-import ListaProdutos from "./components/produto/listaprodutos/ListaProdutos";
+import DeletarProduto from "./components/produto/deletarProduto/DeletarProduto";
+import FormProduto from "./components/produto/formProduto/FormProduto";
+import ListaProdutos from "./components/produto/listaProdutos/ListaProdutos";
 import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCategoria";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListaCategorias from "./components/categoria/listacategorias/ListaCategorias";

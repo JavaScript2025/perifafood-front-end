@@ -5,7 +5,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { buscar, authHeader } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
-import FormCategoria from "../formcategoria/FormCategoria";
+// import FormCategoria from "../formcategoria/FormCategoria";
 import ModalCategoria from "../modalcategoria/ModalCategoria";
 
 function ListaCategorias() {
@@ -51,7 +51,9 @@ function ListaCategorias() {
         </div>
       )}
 
-      {!isLoading && categorias.length === 0 && <p>Nenhuma categoria cadastrada.</p>}
+      {!isLoading && categorias.length === 0 && (
+        <p>Nenhuma categoria cadastrada.</p>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {categorias.map((categoria) => (

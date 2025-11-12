@@ -1,6 +1,6 @@
 import type Produto from "../../../models/Produto";
-import { Link } from "react-router-dom";
-import Botao from "../../botao/Botao";
+import ModalApagarProduto from "../../modais/ModalApagarProduto";
+import ModalEditarProduto from "../../modais/ModalEditarProduto"; // Corrigido
 
 interface CardProps {
   produto: Produto;
@@ -23,18 +23,8 @@ export default function CardProdutos({ produto }: CardProps) {
         <p className="font-semibold">R$ {Number(produto.preco).toFixed(2)}</p>
       </div>
       <div className="p-4 flex gap-2">
-        <Link
-          to={`/editarProduto/${produto.id}`}
-          
-        >
-          <Botao variant="azul"> Editar</Botao>
-        </Link>
-        <Link
-          to={`/deletarProduto/${produto.id}`}
-          
-        >
-           <Botao variant="vermelho"> Apagar</Botao>
-        </Link>
+        <ModalEditarProduto produtoId={produto.id} />
+        <ModalApagarProduto produtoId={produto.id} />
       </div>
     </div>
   );

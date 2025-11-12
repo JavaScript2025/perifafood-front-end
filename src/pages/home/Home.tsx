@@ -1,13 +1,12 @@
-import ListaProdutos from "../../components/produto/listaprodutos/ListaProdutos";
+import ListaProdutos from "../../components/produto/listaProdutos/ListaProdutos";
 
 function Home() {
   return (
     <>
       <div className="bg-[#FEF0E1] flex justify-center">
         <div className="container grid grid-cols-2">
-          
           <div className="flex flex-col gap-5 items-center justify-center ">
-             <h2 className="text-8xl font-bold text-black">Olá,</h2>
+            <h2 className="text-8xl font-bold text-black">Olá,</h2>
             <h2 className="text-[#F27E63] text-7xl font-bold">
               estamos abertos
             </h2>
