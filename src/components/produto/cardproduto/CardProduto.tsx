@@ -1,5 +1,6 @@
 import type Produto from "../../../models/Produto";
 import { Link } from "react-router-dom";
+import Botao from "../../botao/Botao";
 
 interface CardProps {
   produto: Produto;
@@ -24,15 +25,15 @@ export default function CardProdutos({ produto }: CardProps) {
       <div className="p-4 flex gap-2">
         <Link
           to={`/editarProduto/${produto.id}`}
-          className="px-3 py-2 bg-blue-600 text-white rounded"
+          
         >
-          Editar
+          <Botao variant="azul"> Editar</Botao>
         </Link>
         <Link
           to={`/deletarProduto/${produto.id}`}
-          className="px-3 py-2 bg-red-600 text-white rounded"
+          
         >
-          Apagar
+           <Botao variant="vermelho"> Apagar</Botao>
         </Link>
       </div>
     </div>
