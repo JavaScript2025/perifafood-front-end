@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import type Produto from "../../../models/Produto";
 import ModalApagarProduto from "../../modais/ModalApagarProduto";
 import ModalEditarProduto from "../../modais/ModalEditarProduto"; // Corrigido
@@ -15,7 +14,7 @@ export default function CardProdutos({ produto }: CardProps) {
         <img
           src={produto.foto}
           alt={produto.nome_produto}
-          className="w-full h-36 object-cover"  // altura reduzida
+          className="w-full h-36 object-cover" // altura reduzida
         />
       )}
 
@@ -35,18 +34,9 @@ export default function CardProdutos({ produto }: CardProps) {
 
       {/* Ações */}
       <div className="p-3 flex gap-2 justify-end">
-        <Link
-          to={`/editarProduto/${produto.id}`}
-          className="flex-0 px-5 text-center px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-full transition"
-        >
-          Editar
-        </Link>
-        <Link
-          to={`/deletarProduto/${produto.id}`}
-          className="flex-0 px-5 text-center px-2 py-1 bg-red-600 hover:bg-red-700 text-white text-sm rounded-full transition"
-        >
-          Apagar
-        </Link>
+        <ModalEditarProduto produtoId={produto.id} />
+
+        <ModalApagarProduto produtoId={produto.id} />
       </div>
     </div>
   );

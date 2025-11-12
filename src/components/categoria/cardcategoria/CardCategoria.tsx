@@ -1,5 +1,4 @@
 import type Categoria from "../../../models/Categoria";
-import { Link } from "react-router-dom";
 import ModalApagarCategoria from "../../modais/ModalApagarCategoria";
 import ModalEditarCategoria from "../../modais/ModalEditarCategoria";
 
