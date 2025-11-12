@@ -2,14 +2,15 @@ import Popup from "reactjs-popup";
 
 import "reactjs-popup/dist/index.css";
 import FormCategoria from "../formcategoria/FormCategoria";
+import Botao from "../../botao/Botao";
 
 function ModalCategoria() {
   return (
     <Popup
       trigger={
-        <button className="border rounded px-4 py-2 hover:bg-white hover:text-indigo-800 cursor-pointer">
-          Nova Categoria
-        </button>
+
+        <Botao variant="laranja">Nova Categoria</Botao>
+
       }
       modal
       lockScroll

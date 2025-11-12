@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../contexts/AuthContext";
 import type UsuarioLogin from "../../models/UsuarioLogin";
+import Botao from "../../components/botao/Botao";
 
 function Login() {
   const navigate = useNavigate();
@@ -73,17 +74,15 @@ function Login() {
               }
             />
           </div>
-          <button
-            type="submit"
-            className="rounded bg-[#F42513] flex justify-center
-                                   hover:bg-[#FF751F] text-white w-1/2 py-2 cursor-pointer"
-          >
-            {isLoading ? (
+           <Botao type='submit' variant="laranja">  
+          
+          {isLoading ? (
               <ClipLoader color="#ffffff" size={24} />
             ) : (
               <span>Entrar</span>
             )}
-          </button>
+
+          </Botao>
 
           <hr className="border-slate-800 w-full" />
 

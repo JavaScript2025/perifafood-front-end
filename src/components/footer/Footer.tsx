@@ -16,7 +16,7 @@ function Footer() {
 
   if (usuario.token !== "") {
     component = (
-      <footer className="py-12 px-4 bg-muted border-t border-gray-100 border-border bg-[#F42513] text-white font-sans">
+      <footer className="py-12 px-4 bg-muted border-t border-gray-100 border-border bg-[#F27E63] text-white font-sans">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 mb-8">
             <div className="space-y-4">

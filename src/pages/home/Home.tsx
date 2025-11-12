@@ -5,9 +5,10 @@ function Home() {
     <>
       <div className="bg-[#FEF0E1] flex justify-center">
         <div className="container grid grid-cols-2">
-          <div className="flex flex-col gap-4 items-center justify-center py-4">
-            <h2 className="text-8xl font-bold text-black">Olá,</h2>
-            <h2 className="text-[#D9291A] text-8xl font-bold">
+          
+          <div className="flex flex-col gap-5 items-center justify-center ">
+             <h2 className="text-8xl font-bold text-black">Olá,</h2>
+            <h2 className="text-[#F27E63] text-7xl font-bold">
               estamos abertos
             </h2>
             <p className="text-xl">O melhor serviço de entrega do país</p>

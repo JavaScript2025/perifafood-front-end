@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
+import Botao from "../../components/botao/Botao";
 
 function Cadastro() {
   const navigate = useNavigate();
@@ -111,7 +112,7 @@ function Cadastro() {
             />
           </div>
 
-          <div className="flex flex-col w-full">
+          {/* <div className="flex flex-col w-full">
             <label htmlFor="foto">Foto</label>
             <input
               type="text"
@@ -139,7 +140,7 @@ function Cadastro() {
                 atualizarEstado(e)
               }
             />
-          </div>
+          </div> */}
 
           <div className="flex flex-col w-full">
             <label htmlFor="senha">Senha</label>
@@ -171,27 +172,20 @@ function Cadastro() {
             />
           </div>
 
-          <div className="flex justify-around w-full gap-8">
-            <button
-              type="reset"
-              className="rounded text-white bg-red-400 hover:bg-red-700 w-1/2 py-2 cursor-pointer"
-              onClick={retornar}
-            >
+          <div className="flex justify-around w-full gap-4 mt-4">
+            <Botao variant="vermelho" onClick={retornar}>
               Cancelar
-            </button>
+            </Botao>
 
-            <button
+            <Botao
               type="submit"
-              className="rounded text-white bg-[#FF751F]
-                         hover:bg-orange-400 w-1/2 py-2
-                         flex justify-center cursor-pointer"
+              variant="laranja"
+              isLoading={isLoading}
+             
+              
             >
-              {isLoading ? (
-                <ClipLoader color="#ffffff" size={24} />
-              ) : (
-                <span>Cadastrar</span>
-              )}
-            </button>
+              Cadastrar
+            </Botao>
           </div>
         </form>
       </div>

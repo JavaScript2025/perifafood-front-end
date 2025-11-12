@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Depoimentos from "../../components/public/Depoimentos";
 import ComoFunciona from "../../components/public/ComoFunciona";
-import Faq from "../../components/public/FAQ";
+import Faq from "../../components/public/Faq";
+
 
 export default function PublicHome() {
   return (
@@ -47,6 +48,9 @@ export default function PublicHome() {
               Como funciona
             </a>
           </div>
+
+
+          
         </div> 
         
         {/* <div className="w-full h-64 md:h-80 bg-white/60 rounded-2xl border border-orange-200 flex items-center justify-center">

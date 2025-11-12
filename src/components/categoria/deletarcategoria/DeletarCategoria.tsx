@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { buscar, deletar, authHeader } from "../../../services/Service";
+import Botao from "../../botao/Botao";
 
 function DeletarCategoria() {
   const navigate = useNavigate();
@@ -47,18 +48,15 @@ function DeletarCategoria() {
           <strong>{categoria?.tipo}</strong>?
         </p>
         <div className="mt-4 flex gap-2">
-          <button
-            onClick={confirmar}
-            className="bg-red-600 text-white rounded px-4 py-2"
-          >
+          <Botao variant="vermelho" onClick={confirmar}>
             Sim
-          </button>
-          <button
+          </Botao>
+          <Botao
             onClick={() => navigate("/categorias")}
-            className="bg-gray-300 rounded px-4 py-2"
+            variant="cinza"
           >
             Não
-          </button>
+          </Botao>
         </div>
       </div>
     </div>

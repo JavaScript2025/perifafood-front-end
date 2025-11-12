@@ -38,7 +38,6 @@ export default function Faq() {
               {item.q}
               <span className="text-xl text-[#F27E63]">{openIndex === idx ? "–" : "+"}</span>
             </button>
-
             {openIndex === idx && (
               <p className="px-4 pb-4 text-sm text-gray-600">
                 {item.a}

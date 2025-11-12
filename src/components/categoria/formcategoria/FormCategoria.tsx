@@ -15,6 +15,7 @@ import {
   cadastrar,
   authHeader,
 } from "../../../services/Service";
+import Botao from "../../botao/Botao";
 
 function FormCategoria() {
   const navigate = useNavigate();
@@ -93,18 +94,16 @@ function FormCategoria() {
           className="border rounded p-2"
           required
         />
-        <button
-          disabled={isLoading}
-          className="bg-red-600 text-white rounded p-2 cursor-pointer"
-        >
-          {isLoading ? (
+
+<Botao variant="vermelho" disabled={isLoading}>
+  {isLoading ? (
             <ClipLoader size={18} />
           ) : id ? (
             "Atualizar"
           ) : (
             "Cadastrar"
-          )}
-        </button>
+          )}</Botao>
+      
       </form>
     </div>
   );
