@@ -15,8 +15,8 @@ import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCat
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListaCategorias from "./components/categoria/listacategorias/ListaCategorias";
 import VozesDaQuebrada from "./components/public/VozesDaQuebrada";
-import SobreNos from "./pages/sobreNos/sobreNos";
-import Contato from "./pages/contato/Contato";
+import SobreNos from "./pages/public/PublicSobreNos";
+import Contato from "./pages/public/PublicContato";
 
 import { AuthProvider } from "./contexts/AuthContext";
 

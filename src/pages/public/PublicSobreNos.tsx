@@ -28,6 +28,24 @@ const SobreNos = () => {
       linkedin: "https://www.linkedin.com/in/felipemanuel/",
       github: "https://github.com/Felipemanuell/Felipemanuell",
     },
+    {
+      nome: "João Evangelista",
+      foto: "https://avatars.githubusercontent.com/u/88002997?v=4",
+      linkedin: "https://linkedin.com/in/joao-evangelista-44828b189",
+      github: "https://github.com/Evangelista96",
+    },
+    {
+      nome: "Carolaine Gonçalves",
+      foto: "https://github.com/carolainetsg.png",
+      github: "https://github.com/",
+      linkedin: "https://linkedin.com/",
+    },
+    {
+      nome: "Matheus",
+      foto: "https://github.com/matheush-git.png",
+      github: "https://github.com/",
+      linkedin: "https://linkedin.com/",
+    }
   ];
 
   return (
