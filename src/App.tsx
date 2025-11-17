@@ -15,8 +15,6 @@ import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCat
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListaCategorias from "./components/categoria/listacategorias/ListaCategorias";
 import VozesDaQuebrada from "./components/public/VozesDaQuebrada";
-import SobreNos from "./pages/public/PublicSobreNos";
-import Contato from "./pages/public/PublicContato";
 
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -57,8 +55,8 @@ function LayoutWrapper() {
           <Route path="/editarproduto/:id" element={<FormProduto />} />
           <Route path="/deletarproduto/:id" element={<DeletarProduto />} />
           <Route path="/perfil" element={<Perfil />} />
-          <Route path="/sobre" element={<SobreNos />} />
-          <Route path="/contato" element={<Contato />} />
+          <Route path="/sobre" element={<PublicSobreNos />} />
+          <Route path="/contato" element={<PublicContato />} />
         </Routes>
       </div>
 
