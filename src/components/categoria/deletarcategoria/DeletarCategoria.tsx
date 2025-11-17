@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
-import { buscar, deletar, authHeader } from "../../../services/Service";
+import { buscar, deletar} from "../../../services/Service";
 import Botao from "../../botao/Botao";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 interface DeletarCategoriaProps {
   categoriaId?: number;
@@ -23,7 +24,7 @@ function DeletarCategoria({ categoriaId, onDelete }: DeletarCategoriaProps = {})
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado!");
+      ToastAlerta("Você precisa estar logado!", "info");
       navigate("/");
     }
   }, [token]);
@@ -32,7 +33,11 @@ function DeletarCategoria({ categoriaId, onDelete }: DeletarCategoriaProps = {})
     async function carregar() {
       if (!id) return;
       try {
-        await buscar(`/categorias/${id}`, setCategoria, authHeader(token));
+        await buscar(`/categorias/${id}`, setCategoria, {
+          headers: {
+            Authorization: token,
+          }
+        });
       } catch (e: any) {
         if (e.toString().includes("401")) handleLogout();
       }
@@ -44,7 +49,11 @@ function DeletarCategoria({ categoriaId, onDelete }: DeletarCategoriaProps = {})
     if (!id) return;
     setIsDeleting(true);
     try {
-      await deletar(`/categorias/${id}`, authHeader(token));
+      await deletar(`/categorias/${id}`, {
+        headers: {
+            Authorization: token,
+          }
+      });
       
       // Se tem callback (modal), chama ele
       if (onDelete) {
@@ -53,11 +62,12 @@ function DeletarCategoria({ categoriaId, onDelete }: DeletarCategoriaProps = {})
         // Se não tem (página), navega
         navigate("/categorias");
       }
+      ToastAlerta("Categoria deletada com sucesso", "sucesso")
     } catch (e: any) {
       if (e.toString().includes("401")) {
         handleLogout();
       } else {
-        alert("Erro ao deletar categoria!");
+        ToastAlerta("Erro ao deletar categoria!", "erro");
       }
     } finally {
       setIsDeleting(false);

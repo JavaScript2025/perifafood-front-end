@@ -8,15 +8,11 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import type Produto from "../../../models/Produto";
 import type Categoria from "../../../models/Categoria";
-import {
-  atualizar,
-  buscar,
-  cadastrar,
-  authHeader,
-} from "../../../services/Service";
+import type Produto from "../../../models/Produto";
+import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import Botao from "../../botao/Botao";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 interface FormProdutoProps {
   produtoId?: number;
@@ -48,7 +44,7 @@ const FormProduto: React.FC<FormProdutoProps> = ({ produtoId, onSuccess }) => {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado!");
+      ToastAlerta("Você precisa estar logado!", "info");
       navigate("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,7 +52,11 @@ const FormProduto: React.FC<FormProdutoProps> = ({ produtoId, onSuccess }) => {
 
   async function carregarCategorias() {
     try {
-      await buscar("/categorias", setCategorias, authHeader(token));
+      await buscar("/categorias", setCategorias, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     }
@@ -64,7 +64,11 @@ const FormProduto: React.FC<FormProdutoProps> = ({ produtoId, onSuccess }) => {
 
   async function buscarProdutoPorId(idParam: string) {
     try {
-      await buscar(`/produtos/${idParam}`, setProduto, authHeader(token));
+      await buscar(`/produtos/${idParam}`, setProduto, {
+        headers: {
+          Authorization: token,
+        },
+      });
       // depois de setProduto, garantir que categoriaId seja atualizado a partir do produto retornado
       // como buscar é assíncrono, pegamos a resposta via state - portanto usar setTimeout pequeno
       // ou ajustar buscar para retornar o resultado. Aqui, vamos atualizar usando o produto vindo do state através de useEffect:
@@ -111,9 +115,19 @@ const FormProduto: React.FC<FormProdutoProps> = ({ produtoId, onSuccess }) => {
 
     try {
       if (id) {
-        await atualizar("/produtos", payload, setProduto, authHeader(token));
+        await atualizar("/produtos", payload, setProduto, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        ToastAlerta("Categoria atualizada com sucesso", "sucesso")
       } else {
-        await cadastrar("/produtos", payload, setProduto, authHeader(token));
+        await cadastrar("/produtos", payload, setProduto, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        ToastAlerta("Categoria cadastrada com sucesso", "sucesso")
       }
 
       // chama callback de sucesso se existir, caso contrário navega
@@ -135,7 +149,7 @@ const FormProduto: React.FC<FormProdutoProps> = ({ produtoId, onSuccess }) => {
         onSubmit={gerarProduto}
         className="bg-white shadow rounded p-4 flex flex-col gap-3"
       >
-        <h2 className="text-xl font-bold">
+        <h2 className="text-xl font-bold text-center">
           {id ? "Editar produto" : "Novo produto"}
         </h2>
 

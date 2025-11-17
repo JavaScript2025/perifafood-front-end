@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Produto from "../../../models/Produto";
-import { buscar, deletar, authHeader } from "../../../services/Service";
+import { buscar, deletar } from "../../../services/Service";
 import Botao from "../../botao/Botao";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 interface DeletarProdutoProps {
   produtoId?: number;
@@ -32,7 +33,11 @@ function DeletarProduto({ produtoId, onDelete }: DeletarProdutoProps = {}) {
     async function carregar() {
       if (!id) return;
       try {
-        await buscar(`/produtos/${id}`, setProduto, authHeader(token));
+        await buscar(`/produtos/${id}`, setProduto, {
+          headers: {
+            Authorization: token,
+          },
+        });
       } catch (e: any) {
         if (e.toString().includes("401")) handleLogout();
       }
@@ -44,18 +49,23 @@ function DeletarProduto({ produtoId, onDelete }: DeletarProdutoProps = {}) {
     if (!id) return;
     setIsDeleting(true);
     try {
-      await deletar(`/produtos/${id}`, authHeader(token));
+      await deletar(`/produtos/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
 
       if (onDelete) {
         onDelete();
       } else {
         navigate("/produtos");
       }
+      ToastAlerta("Produto deletado com sucesso", "sucesso");
     } catch (e: any) {
       if (e.toString().includes("401")) {
         handleLogout();
       } else {
-        alert("Erro ao deletar produto!");
+        ToastAlerta("Erro ao deletar produto!", "erro");
       }
     } finally {
       setIsDeleting(false);

@@ -6,6 +6,7 @@ import { User, Mail, Image as ImageIcon, Lock, Eye, EyeOff, MailIcon } from "luc
 import Botao from "../../components/botao/Botao";
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function Cadastro() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Cadastro() {
   }, [usuario]);
 
   function retornar() {
-    navigate("/");
+    navigate("/login");
   }
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
@@ -53,15 +54,15 @@ function Cadastro() {
 
       try {
         await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario);
-        alert("Usuário cadastrado com sucesso!");
+        ToastAlerta("Usuário cadastrado com sucesso!", "sucesso")
       } catch (error) {
-        alert("Erro ao cadastrar usuário!");
+        ToastAlerta("Erro ao cadastrar usuário!", "erro");
       } finally {
         setIsLoading(false);
       }
     } else {
-      alert(
-        "Dados do usuário inconsistentes! Verifique as informações do cadastro."
+      ToastAlerta(
+        "Dados do usuário inconsistentes! Verifique as informações do cadastro.", "erro"
       );
       setUsuario({ ...usuario, senha: "" });
       setConfirmarSenha("");

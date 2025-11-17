@@ -24,7 +24,7 @@ function ModalEditarProduto({ produtoId, onEdit }: ModalEditarProdutoProps) {
       open={isOpen}
       onOpen={() => setIsOpen(true)}
       onClose={() => setIsOpen(false)}
-      trigger={<Botao variant="laranja">Editar</Botao>}
+      trigger={<Botao variant="azul">Editar</Botao>}
       modal
       lockScroll
       closeOnEscape

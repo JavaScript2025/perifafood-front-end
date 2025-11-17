@@ -20,6 +20,7 @@ export default function CardCategoria({
       </div>
       <div className="mt-4 flex gap-2">
         <ModalEditarCategoria categoriaId={categoria.id} onEdit={onEdit} />
+        
         <ModalApagarCategoria categoriaId={categoria.id} onDelete={onDelete} />
       </div>
     </div>

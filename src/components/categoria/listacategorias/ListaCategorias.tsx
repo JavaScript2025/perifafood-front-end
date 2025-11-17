@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
-import { buscar, authHeader } from "../../../services/Service";
+import { buscar } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
 import ModalCategoria from "../modalcategoria/ModalCategoria";
 
@@ -24,7 +24,11 @@ function ListaCategorias() {
   async function carregar() {
     setIsLoading(true);
     try {
-      await buscar("/categorias", setCategorias, authHeader(token));
+      await buscar("/categorias", setCategorias, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (e: any) {
       if (e.toString().includes("401")) handleLogout();
     } finally {
@@ -40,7 +44,13 @@ function ListaCategorias() {
     <div className="container mx-auto px-4 py-6 bg-[#F2F2F2] rounded-xl min-h-[calc(100vh-230px)]">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Categorias</h1>
-        <ModalCategoria />
+        {/* <ModalCategoria /> */}
+        <Link
+          to={"/cadastrarcategoria"}
+          className="px-4 py-2 rounded-lg font-semibold text-white bg-amber-500 hover:bg-orange-600 transition-all duration-300 shadow-md hover:shadow-lg"
+        >
+          Nova Categoria
+        </Link>
       </div>
 
       {isLoading && (

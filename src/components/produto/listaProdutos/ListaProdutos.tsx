@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Produto from "../../../models/Produto";
-import { buscar, authHeader } from "../../../services/Service";
+import { buscar } from "../../../services/Service";
 import CardProduto from "../cardProduto/CardProduto";
+// import ModalProduto from "../modalProduto/ModalProduto";
+import { Link } from "react-router-dom";
 import ModalProduto from "../modalProduto/ModalProduto";
 
 interface ListaProdutosProps {
@@ -31,7 +33,11 @@ function ListaProdutos({
   async function buscarProdutos() {
     setIsLoading(true);
     try {
-      await buscar("/produtos", setProdutos, authHeader(token));
+      await buscar("/produtos", setProdutos, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error: any) {
       if (error?.response?.status === 403 || error?.response?.status === 401) {
         handleLogout();
@@ -49,16 +55,13 @@ function ListaProdutos({
 
   return (
     <div className="container bg-[#F2F2F2] rounded-xl mx-auto mt-4 px-4 py-6">
-      {(showCreateButton || showTitle) && (
+      
         <div className="mb-6 flex items-center justify-between">
-          {showTitle ? (
+          
             <h2 className="text-2xl font-bold">Produtos</h2>
-          ) : (
-            <div />
-          )}
-          {showCreateButton && <ModalProduto />}
+          
+          <Link to={"/cadastrarproduto"} className="px-4 py-2 rounded-lg font-semibold text-white bg-amber-500 hover:bg-orange-600 transition-all duration-300 shadow-md hover:shadow-lg">Novo Produto</Link>
         </div>
-      )}
 
       {isLoading ? (
         <div className="w-full flex justify-center items-center py-8">

@@ -9,13 +9,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
-import {
-  atualizar,
-  buscar,
-  cadastrar,
-  authHeader,
-} from "../../../services/Service";
+import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import Botao from "../../botao/Botao";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 interface FormCategoriaProps {
   categoriaId?: number;
@@ -45,7 +41,11 @@ function FormCategoria({ categoriaId, onSuccess }: FormCategoriaProps = {}) {
 
   async function buscarCategoriaPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setCategoria, authHeader(token));
+      await buscar(`/categorias/${id}`, setCategoria, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error: any) {
       if (error.toString().includes("401")) handleLogout();
     }
@@ -64,19 +64,19 @@ function FormCategoria({ categoriaId, onSuccess }: FormCategoriaProps = {}) {
     setIsLoading(true);
     try {
       if (id) {
-        await atualizar(
-          "/categorias",
-          categoria,
-          setCategoria,
-          authHeader(token)
-        );
+        await atualizar("/categorias", categoria, setCategoria, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        ToastAlerta("Categoria atualizada com sucesso", "sucesso")
       } else {
-        await cadastrar(
-          "/categorias",
-          categoria,
-          setCategoria,
-          authHeader(token)
-        );
+        await cadastrar("/categorias", categoria, setCategoria, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        ToastAlerta("Categoria cadastrada com sucesso", "sucesso")
       }
 
       // ✅ chama a função de sucesso (para fechar a modal e atualizar a lista)
@@ -95,7 +95,7 @@ function FormCategoria({ categoriaId, onSuccess }: FormCategoriaProps = {}) {
         onSubmit={salvar}
         className="bg-white shadow rounded p-4 flex flex-col gap-3"
       >
-        <h2 className="text-xl font-bold">
+        <h2 className="text-xl font-bold text-center">
           {id ? "Editar categoria" : "Nova categoria"}
         </h2>
         <input
