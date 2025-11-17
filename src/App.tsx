@@ -23,6 +23,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages/home/Home";
 import Perfil from "./pages/perfil/Perfil";
 import PublicHome from "./pages/public/PublicHome";
+import PublicContato from "./pages/public/PublicContato";
+import PublicSobreNos from "./pages/public/PublicSobreNos";
 import Auth from "./pages/auth/Auth";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +41,8 @@ function LayoutWrapper() {
         <Routes>
           {/* PÚBLICAS */}
           <Route path="/" element={<PublicHome />} />
+          <Route path="/sobre" element={<PublicSobreNos />} />
+          <Route path="/contato" element={<PublicContato />} />
           <Route path="/login" element={<Auth />} />
           <Route path="/cadastro" element={<Navigate to="/login" replace />} />
 
