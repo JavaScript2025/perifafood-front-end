@@ -55,8 +55,6 @@ function LayoutWrapper() {
           <Route path="/editarproduto/:id" element={<FormProduto />} />
           <Route path="/deletarproduto/:id" element={<DeletarProduto />} />
           <Route path="/perfil" element={<Perfil />} />
-          <Route path="/sobre" element={<PublicSobreNos />} />
-          <Route path="/contato" element={<PublicContato />} />
         </Routes>
       </div>
 
